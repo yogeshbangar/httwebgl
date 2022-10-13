@@ -12,15 +12,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@react-three/drei": "^9.34.3",
+    "@react-three/fiber": "^8.8.10",
+    "canvas-sketch-util": "^1.10.0",
     "cross-env": "^7.0.3",
     "express": "^4.18.2",
     "next": "^12.3.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.145.0"
   },
   "devDependencies": {
     "@types/node": "18.8.4",
     "@types/react": "18.0.21",
+    "eslint": "^8.25.0",
+    "eslint-config-next": "^12.3.1",
+    "prettier": "^2.7.1",
     "typescript": "4.8.4"
   }
 }
