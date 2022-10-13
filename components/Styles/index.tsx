@@ -4,6 +4,7 @@ const Styles = () => {
       body {
         margin: 0;
         color: #fff;
+        background: #000;
       }
     `}</style>
   );

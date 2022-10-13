@@ -64,7 +64,7 @@ const UI = () => {
             <li className="">
               <div
                 className="menu-item"
-                onClick={() => setState({ ...state, menu: MenuItem.HOME })}
+                onClick={() => setState({ ...state, menu: undefined })}
               >
                 HOME
               </div>
@@ -75,7 +75,7 @@ const UI = () => {
             >
               <div className="menu-item">ABOUT</div>
             </li>
-            <li className="">
+            <li style={{ display: "none" }}>
               <div
                 className="menu-item"
                 onClick={() => setState({ ...state, menu: MenuItem.CAREER })}
@@ -83,7 +83,7 @@ const UI = () => {
                 CAREER
               </div>
             </li>
-            <li className="">
+            <li className="" style={{ display: "none" }}>
               <div
                 className="menu-item"
                 onClick={() => setState({ ...state, menu: MenuItem.EXPERTISE })}
@@ -91,7 +91,7 @@ const UI = () => {
                 EXPERTISE
               </div>
             </li>
-            <li className="">
+            <li className="" style={{ display: "none" }}>
               <div
                 className="menu-item"
                 onClick={() => setState({ ...state, menu: MenuItem.CONTACT })}
