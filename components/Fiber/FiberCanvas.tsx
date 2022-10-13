@@ -4,6 +4,7 @@ import { PresentationControls, Environment, Loader } from "@react-three/drei";
 import Model from "./Model";
 import { environmentImagePath } from "../Assets";
 import { SpaceDust } from "./SpaceDust";
+import SkullPlan from "./SkulPlane";
 const FiberCanvas = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const FiberCanvas = () => {
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
+          <SkullPlan />
           <PresentationControls
             global
             config={{ mass: 2, tension: 500 }}
