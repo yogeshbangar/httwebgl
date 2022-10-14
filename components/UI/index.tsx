@@ -108,22 +108,22 @@ const UI = () => {
             <img
               src={`${basePath}3D/tata.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}` })}
+              onClick={() => setState({ ...state, url: `${basePath}Games/TataSky` })}
             />
             <img
               src={`${basePath}3D/mutual.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}` })}
+              onClick={() => setState({ ...state, url: `${basePath}Games/MutualFunds` })}
             />
             <img
               src={`${basePath}3D/citi.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}` })}
+              onClick={() => setState({ ...state, url: `${basePath}Games/Cricket` })}
             />
             <img
               src={`${basePath}3D/champ.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}` })}
+              onClick={() => setState({ ...state, url: `${basePath}Games/AMFI_9` })}
             />
           </div>
         )}
