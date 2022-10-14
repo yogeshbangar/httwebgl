@@ -1,9 +1,11 @@
 import React from "react";
 import { MenuItem } from "../Assets";
-import Popup from "./Popup";
+import About from "./About";
+import PopupContainer from "./PopupContainer";
+import PopupPage from "./PopupPage";
 
 const UI = () => {
-  const [state, setState] = React.useState({ menu: undefined });
+  const [state, setState] = React.useState({ menu: undefined, url: undefined });
   return (
     <>
       <div className="ui-container">
@@ -23,7 +25,7 @@ const UI = () => {
           <div className="social">
             <div className="social-icn">
               <a
-                href="https://github.com/medamine7"
+                href="https://github.com/yogeshbangar"
                 target="_blank"
                 rel="noreferrer"
                 title="Github profile"
@@ -34,7 +36,7 @@ const UI = () => {
                 />
               </a>
               <a
-                href="https://www.linkedin.com/in/mohamed-amine-baladi-0aa7a4167"
+                href="https://www.linkedin.com/in/yogesh-bangar-45632b18"
                 target="_blank"
                 rel="noreferrer"
                 title="Linkedin profile"
@@ -45,7 +47,7 @@ const UI = () => {
                 />
               </a>
               <a
-                href="https://www.instagram.com/_mab7/"
+                href="https://www.instagram.com/yogesh.bangar25/"
                 target="_blank"
                 rel="noreferrer"
                 title="Instagram profile"
@@ -83,12 +85,12 @@ const UI = () => {
                 CAREER
               </div>
             </li>
-            <li className="" style={{ display: "none" }}>
+            <li className="">
               <div
                 className="menu-item"
                 onClick={() => setState({ ...state, menu: MenuItem.EXPERTISE })}
               >
-                EXPERTISE
+                PROJECTS
               </div>
             </li>
             <li className="" style={{ display: "none" }}>
@@ -100,16 +102,67 @@ const UI = () => {
               </div>
             </li>
           </ul>
-          {state.menu && (
-            <Popup
-              onClose={() => setState({ ...state, menu: undefined })}
-              title={state.menu}
-            />
-          )}
         </div>
+        {state.menu === MenuItem.EXPERTISE && (
+          <div className="identity footer">
+            <img
+              src="https://hututusoftwares.com/3D/tata.png"
+              className="img-game"
+              onClick={() =>
+                setState({ ...state, url: "https://hututusoftwares.com/" })
+              }
+            />
+            <img
+              src="https://hututusoftwares.com/3D/mutual.png"
+              className="img-game"
+              onClick={() =>
+                setState({ ...state, url: "https://hututusoftwares.com/" })
+              }
+            />
+            <img
+              src="https://hututusoftwares.com/3D/citi.png"
+              className="img-game"
+              onClick={() =>
+                setState({ ...state, url: "https://hututusoftwares.com/" })
+              }
+            />
+            <img
+              src="https://hututusoftwares.com/3D/champ.png"
+              className="img-game"
+              onClick={() =>
+                setState({ ...state, url: "https://hututusoftwares.com/" })
+              }
+            />
+          </div>
+        )}
       </div>
-
+      {state.menu === MenuItem.ABOUT && (
+        <PopupContainer maxWidth={"800px"} zIndex={100000}>
+          <About
+            onClose={() => setState({ ...state, menu: undefined })}
+            title={state.menu}
+          />
+        </PopupContainer>
+      )}
+      {state.url && (
+        <PopupPage
+          onClose={() => {
+            setState({ ...state, url: undefined });
+            console.log("~~~~~2~~~~~~~~~~");
+          }}
+          url={state.url}
+        />
+      )}
       <style jsx global>{`
+        .footer{
+          justify-content: center;
+        }
+        .img-game{
+          width:80px;
+          height:auto;
+          border-radius: 100px;
+          margin: 0 5px;
+        }
         .social {
           margin-left: auto;
         }

@@ -1,16 +1,19 @@
-const Popup = ({ onClose, title }: { onClose: () => void; title: string }) => {
+const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
   return (
     <>
       <div className="sc-ieecCq gCPXug">
         <div className="sc-bdvvtL IJwLM open-appear-done open-enter-done">
-          <div className="close" onClick={onClose}></div>
+          <div className="close" onClick={onClose}>
+            <span style={{ marginLeft: "6px" }}>x</span>
+          </div>
           <div className="sc-gsDKAQ gAWZmv window-content">
             <div className="sc-hKwDye edvhnN">
-              <h1>{title}</h1>
+              <h1 style={{marginLeft:'20px'}}>{title}</h1>
               <div className="about-content scrollable">
                 <div className="avatar">
                   <div className="image"></div>
-                  <div className="id">48C70354E1D6</div>
+                  <div className="id">+91-9425959123</div>
+                  <div className="id">skype: yogeshbangar</div>
                 </div>
                 <div className="paragraphs">
                   <div>
@@ -49,19 +52,6 @@ const Popup = ({ onClose, title }: { onClose: () => void; title: string }) => {
           background-position: center center;
         }
 
-        .IJwLM .close::before,
-        .IJwLM .close::after {
-          content: "";
-          position: absolute;
-          inset: 0px;
-          margin: auto;
-          height: 1px;
-          width: 70%;
-          background: rgb(172, 172, 172);
-        }
-        .IJwLM .close::after {
-          transform: rotate(45deg);
-        }
         .IJwLM .close {
           pointer-events: auto;
         }
@@ -149,4 +139,4 @@ const Popup = ({ onClose, title }: { onClose: () => void; title: string }) => {
     </>
   );
 };
-export default Popup;
+export default About;

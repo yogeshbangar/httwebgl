@@ -3,11 +3,17 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { watchGLBPath } from "../Assets";
+import { setWireFrameMaterial } from "../util";
 
 const Model = (props) => {
   const watchGlb = useGLTF(watchGLBPath);
   console.log(watchGlb);
   const ref = useRef();
+  React.useEffect(() => {
+    if (watchGlb) {
+      setWireFrameMaterial(watchGlb.scene);
+    }
+  }, [watchGlb]);
   useFrame((state) => {
     const refCurrent: THREE.Mesh = ref?.current;
     const t = state.clock.getElapsedTime();
@@ -19,8 +25,13 @@ const Model = (props) => {
     }
   });
   return (
-    <group ref={ref} {...props} dispose={null}>
-      <primitive scale={[30, 30, 30]} object={watchGlb.scene} dispose={null} />
+    <group {...props} dispose={null}>
+      <primitive
+        ref={ref}
+        scale={[30, 30, 30]}
+        object={watchGlb.scene}
+        dispose={null}
+      />
     </group>
   );
 };

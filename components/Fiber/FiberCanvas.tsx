@@ -5,6 +5,7 @@ import Model from "./Model";
 import { environmentImagePath } from "../Assets";
 import { SpaceDust } from "./SpaceDust";
 import SkullPlan from "./SkulPlane";
+import Globe from "./Globe";
 const FiberCanvas = () => {
   return (
     <>
