@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem } from "../Assets";
+import { basePath, MenuItem } from "../Assets";
 import About from "./About";
 import PopupContainer from "./PopupContainer";
 import PopupPage from "./PopupPage";
@@ -106,32 +106,24 @@ const UI = () => {
         {state.menu === MenuItem.EXPERTISE && (
           <div className="identity footer">
             <img
-              src="https://hututusoftwares.com/3D/tata.png"
+              src={`${basePath}3D/tata.png`}
               className="img-game"
-              onClick={() =>
-                setState({ ...state, url: "https://hututusoftwares.com/" })
-              }
+              onClick={() => setState({ ...state, url: `${basePath}` })}
             />
             <img
-              src="https://hututusoftwares.com/3D/mutual.png"
+              src={`${basePath}3D/mutual.png`}
               className="img-game"
-              onClick={() =>
-                setState({ ...state, url: "https://hututusoftwares.com/" })
-              }
+              onClick={() => setState({ ...state, url: `${basePath}` })}
             />
             <img
-              src="https://hututusoftwares.com/3D/citi.png"
+              src={`${basePath}3D/citi.png`}
               className="img-game"
-              onClick={() =>
-                setState({ ...state, url: "https://hututusoftwares.com/" })
-              }
+              onClick={() => setState({ ...state, url: `${basePath}` })}
             />
             <img
-              src="https://hututusoftwares.com/3D/champ.png"
+              src={`${basePath}3D/champ.png`}
               className="img-game"
-              onClick={() =>
-                setState({ ...state, url: "https://hututusoftwares.com/" })
-              }
+              onClick={() => setState({ ...state, url: `${basePath}` })}
             />
           </div>
         )}
