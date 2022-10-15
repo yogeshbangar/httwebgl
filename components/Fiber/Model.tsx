@@ -4,14 +4,18 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { watchGLBPath } from "../Assets";
 import { setWireFrameMaterial } from "../util";
-
+import { actionDeposited } from "../../redux/action";
+import { useDispatch } from "react-redux";
 const Model = (props) => {
+  const dispatch = useDispatch();
   const watchGlb = useGLTF(watchGLBPath);
   console.log(watchGlb);
   const ref = useRef();
   React.useEffect(() => {
     if (watchGlb) {
       setWireFrameMaterial(watchGlb.scene);
+
+      dispatch(actionDeposited(true));
     }
   }, [watchGlb]);
   useFrame((state) => {

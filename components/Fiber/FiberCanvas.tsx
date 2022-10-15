@@ -27,7 +27,9 @@ const FiberCanvas = () => {
             polar={[-Math.PI / 3, Math.PI / 3]}
             azimuth={[-Math.PI / 1.4, Math.PI / 2]}
           >
-            <Model />
+            <React.Suspense>
+              <Model />
+            </React.Suspense>
           </PresentationControls>
           <Environment files={environmentImagePath} />
           <SpaceDust count={1000} />

@@ -3,9 +3,14 @@ import { basePath, MenuItem } from "../Assets";
 import About from "./About";
 import PopupContainer from "./PopupContainer";
 import PopupPage from "./PopupPage";
-
+import { useSelector } from "react-redux";
+import { IMainState } from "../../interfaces";
+import Loading from "./Loading";
 const UI = () => {
   const [state, setState] = React.useState({ menu: undefined, url: undefined });
+  const isAllModelLoaded = useSelector(
+    (state: IMainState) => state.clientState.isAllModelLoaded
+  );
   return (
     <>
       <div className="ui-container">
@@ -66,7 +71,9 @@ const UI = () => {
             <li className="">
               <div
                 className="menu-item"
-                onClick={() => setState({ ...state, menu: undefined })}
+                onClick={() => {
+                  setState({ ...state, menu: undefined });
+                }}
               >
                 HOME
               </div>
@@ -108,22 +115,30 @@ const UI = () => {
             <img
               src={`${basePath}3D/tata.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}Games/TataSky` })}
+              onClick={() =>
+                setState({ ...state, url: `${basePath}Games/TataSky` })
+              }
             />
             <img
               src={`${basePath}3D/mutual.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}Games/MutualFunds` })}
+              onClick={() =>
+                setState({ ...state, url: `${basePath}Games/MutualFunds` })
+              }
             />
             <img
               src={`${basePath}3D/citi.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}Games/Cricket` })}
+              onClick={() =>
+                setState({ ...state, url: `${basePath}Games/Cricket` })
+              }
             />
             <img
               src={`${basePath}3D/champ.png`}
               className="img-game"
-              onClick={() => setState({ ...state, url: `${basePath}Games/AMFI_9` })}
+              onClick={() =>
+                setState({ ...state, url: `${basePath}Games/AMFI_9` })
+              }
             />
           </div>
         )}
@@ -145,6 +160,7 @@ const UI = () => {
           url={state.url}
         />
       )}
+      {!isAllModelLoaded && <Loading />}
       <style jsx global>{`
         .footer{
           justify-content: center;
