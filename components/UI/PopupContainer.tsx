@@ -36,7 +36,7 @@ const PopupContainer = ({
           display: flex;
           align-items: center;
           z-index: ${zIndex};
-          padding-top: ${onClose ? "200px" : "280px"};
+          padding-top: ${onClose ? "100px" : "150px"};
           border-radius: 0 !important;
         }
         .content-container {

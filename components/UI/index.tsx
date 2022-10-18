@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { IMainState } from "../../interfaces";
 import Loading from "./Loading";
 import { visitedCount } from "../Firebase/config";
+import { FaHome, FaInfo, FaFortAwesome } from "react-icons/fa";
 const UI = () => {
   const [state, setState] = React.useState({
     menu: undefined,
@@ -91,21 +92,19 @@ const UI = () => {
                   setState({ ...state, menu: undefined });
                 }}
               >
-                HOME
+                <FaHome />
+                <span className="menu-title">HOME</span>
               </div>
             </li>
-            <li
-              className="active"
-              onClick={() => setState({ ...state, menu: MenuItem.ABOUT })}
-            >
-              <div className="menu-item">ABOUT</div>
-            </li>
-            <li style={{ display: "none" }}>
+            <li className="">
               <div
                 className="menu-item"
-                onClick={() => setState({ ...state, menu: MenuItem.CAREER })}
+                onClick={() => {
+                  setState({ ...state, menu: MenuItem.ABOUT });
+                }}
               >
-                CAREER
+                <FaInfo />
+                <span className="menu-title">About</span>
               </div>
             </li>
             <li className="">
@@ -113,7 +112,8 @@ const UI = () => {
                 className="menu-item"
                 onClick={() => setState({ ...state, menu: MenuItem.EXPERTISE })}
               >
-                PROJECTS
+                <FaFortAwesome />
+                <span className="menu-title">PROJECTS</span>
               </div>
             </li>
             <li className="" style={{ display: "none" }}>
@@ -121,7 +121,8 @@ const UI = () => {
                 className="menu-item"
                 onClick={() => setState({ ...state, menu: MenuItem.CONTACT })}
               >
-                CONTACT
+                <FaInfo />
+                <span className="menu-title">CONTACT</span>
               </div>
             </li>
           </ul>
@@ -160,7 +161,11 @@ const UI = () => {
         )}
       </div>
       {state.menu === MenuItem.ABOUT && (
-        <PopupContainer maxWidth={"800px"} zIndex={100000}>
+        <PopupContainer
+          maxWidth={"800px"}
+          zIndex={100000}
+          className="about-popup"
+        >
           <About
             onClose={() => setState({ ...state, menu: undefined })}
             title={state.menu}
@@ -178,12 +183,15 @@ const UI = () => {
       )}
       {!isAllModelLoaded && <Loading />}
       <style jsx global>{`
-        .footer{
+        .menu-title {
+          margin: 0 5px;
+        }
+        .footer {
           justify-content: center;
         }
-        .img-game{
-          width:80px;
-          height:auto;
+        .img-game {
+          width: 80px;
+          height: auto;
           border-radius: 100px;
           margin: 0 5px;
         }
@@ -193,10 +201,10 @@ const UI = () => {
         .title {
           margin-left: 10px;
           text-shadow: 0 0 1.1em #fff, 0 0 1.2em #fff;
-          animation:title-anim;
-          animation-duration : .1s;
+          animation: title-anim;
+          animation-duration: 0.1s;
         }
-        @keyframes title-anim{
+        @keyframes title-anim {
           from {
             transform: translateX(-400px);
           }
@@ -333,6 +341,24 @@ const UI = () => {
           height: 100%;
           object-fit: contain;
           margin: 10px;
+        }
+        @media (max-width: 576px) {
+          .menu-title {
+            display: none;
+          }
+          .menu-ui li {
+            width: 60px;
+          }
+          .about-popup {
+            padding-top: 80px !important;
+          }
+          .social {
+            width: 50px;
+          }
+          .ui-container {
+            padding: 20px;
+          }
+        }
       `}</style>
     </>
   );

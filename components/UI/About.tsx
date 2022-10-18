@@ -8,7 +8,7 @@ const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
           </div>
           <div className="sc-gsDKAQ gAWZmv window-content">
             <div className="sc-hKwDye edvhnN">
-              <h1 style={{marginLeft:'20px'}}>{title}</h1>
+              <h1 style={{ marginLeft: "20px" }}>{title}</h1>
               <div className="about-content scrollable">
                 <div className="avatar">
                   <div className="image"></div>
@@ -17,14 +17,14 @@ const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
                 </div>
                 <div className="paragraphs">
                   <div>
-                    <p>
+                    <span>
                       HI, I AM Yogesh Bangar. I'M A FULL STACK WEB DEVELOPER
                       BASED IN ESSAOUIRA, MOROCCO. THIS WEBSITE IS A PERSONAL
                       PROJECT THAT SERVES AS A PORTFOLIO. BUILT USING REACT,
                       THREE.JS/REACT-THREE-FIBER AND BLENDER. FEEL FREE TO
                       CONTACT ME USING THE CONTACT PAGE OR THROUGH ONE OF THE
                       SOCIAL MEDIA PROFILES.
-                    </p>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -134,6 +134,21 @@ const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
           width: 100%;
           background: rgba(0, 0, 0, 0.8);
           margin-top: auto;
+        }
+        @media (max-width: 576px) {
+          .edvhnN .about-content {
+            padding: 0px;
+            letter-spacing: 0px;
+          }
+          .edvhnN .about-content .avatar {
+            width: 110px;
+            height: 200px;
+            margin-right: 10px;
+          }
+          .IJwLM {
+            background: rgba(0, 0, 0, 1.9);
+            background-image: linear-gradient(#222, black);
+          }
         }
       `}</style>
     </>
