@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, get, child, set } from "firebase/database";
+import { getDatabase, ref, get, child, set, Database } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyCdOKvh74sVAfkA7FlshgETcjf37Lmx4Do",
   authDomain: "typing-speed-25.firebaseapp.com",
@@ -11,13 +11,16 @@ const firebaseConfig = {
   measurementId: "G-7SRJQKLDT0",
 };
 
-const init = () => {
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
+const getDB = (): Database => {
+  try {
+    return getDatabase();
+  } catch (e) {
+    const app = initializeApp(firebaseConfig);
+    return getDatabase(app);
+  }
 };
 export const getUserCount = async () => {
-  init();
-  const dbRef = ref(getDatabase());
+  const dbRef = ref(getDB());
   const snapshot = await get(child(dbRef, `/users/`));
   if (snapshot?.val() === null) {
     set(ref(getDatabase(), "users/"), {
@@ -27,9 +30,9 @@ export const getUserCount = async () => {
   return snapshot?.val();
 };
 
-export const writeUserData = async () => {
+export const visitedCount = async () => {
   const val = await getUserCount();
-  set(ref(getDatabase(), "users/"), {
+  set(ref(getDB(), "users/"), {
     count: (val?.count || 0) + 1,
   });
   return val;

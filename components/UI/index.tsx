@@ -1,31 +1,44 @@
 import React from "react";
-import { basePath, MenuItem } from "../Assets";
+import { basePath, loadingGif, MenuItem } from "../Assets";
 import About from "./About";
 import PopupContainer from "./PopupContainer";
 import PopupPage from "./PopupPage";
 import { useSelector } from "react-redux";
 import { IMainState } from "../../interfaces";
 import Loading from "./Loading";
+import { visitedCount } from "../Firebase/config";
 const UI = () => {
-  const [state, setState] = React.useState({ menu: undefined, url: undefined });
+  const [state, setState] = React.useState({
+    menu: undefined,
+    url: undefined,
+    visitCount: 0,
+  });
   const isAllModelLoaded = useSelector(
     (state: IMainState) => state.clientState.isAllModelLoaded
   );
+  React.useEffect(() => {
+    visitedCount()
+      .then((res) => {
+        setState({ ...state, visitCount: res?.count });
+      })
+      .catch((e) => console.error(e));
+  }, []);
   return (
     <>
       <div className="ui-container">
         <div className="identity">
           <img
-            src="https://www.baladi.codes/tarbouch.min.gif"
+            src={loadingGif}
             alt=""
             draggable="false"
             className="gif-animation"
           />
           <div className="title">
             <div>
-              <h2>YOGESH BANGAR</h2>
+              <h2 style={{ marginBottom: "10px" }}>YOGESH BANGAR</h2>
             </div>
-            <h3>FULL STACK WEB DEVELOPER</h3>
+
+            <span style={{ fontWeight: "800" }}>FULL STACK WEB DEVELOPER</span>
           </div>
           <div className="social">
             <div className="social-icn">
@@ -63,6 +76,9 @@ const UI = () => {
                 />
               </a>
             </div>
+            {state.visitCount ? (
+              <div style={{ textAlign: "center" }}>{state.visitCount}</div>
+            ) : null}
           </div>
         </div>
         <div className="detail">
@@ -176,6 +192,17 @@ const UI = () => {
         }
         .title {
           margin-left: 10px;
+          text-shadow: 0 0 1.1em #fff, 0 0 1.2em #fff;
+          animation:title-anim;
+          animation-duration : .1s;
+        }
+        @keyframes title-anim{
+          from {
+            transform: translateX(-400px);
+          }
+          to {
+            transform: translateX(0px);
+          }
         }
         .identity {
           display: flex;
