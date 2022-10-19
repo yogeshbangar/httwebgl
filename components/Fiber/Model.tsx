@@ -9,12 +9,10 @@ import { useDispatch } from "react-redux";
 const Model = (props) => {
   const dispatch = useDispatch();
   const watchGlb = useGLTF(watchGLBPath);
-  console.log(watchGlb);
   const ref = useRef();
   React.useEffect(() => {
     if (watchGlb) {
       setWireFrameMaterial(watchGlb.scene);
-
       dispatch(actionDeposited(true));
     }
   }, [watchGlb]);
