@@ -1,3 +1,4 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, child, set, Database } from "firebase/database";
 const firebaseConfig = {
@@ -31,6 +32,10 @@ export const getUserCount = async () => {
 };
 
 export const visitedCount = async () => {
+  const result = await axios.get(
+    `/api/usercount`
+  );
+  console.log(result);
   const val = await getUserCount();
   set(ref(getDB(), "users/"), {
     count: (val?.count || 0) + 1,
