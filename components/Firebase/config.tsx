@@ -1,6 +1,15 @@
 import axios from "axios";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, child, set, Database } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  get,
+  child,
+  set,
+  Database,
+  onValue,
+} from "firebase/database";
+import { GeoLocation } from "../services/geolocation";
 const firebaseConfig = {
   apiKey: "AIzaSyCdOKvh74sVAfkA7FlshgETcjf37Lmx4Do",
   authDomain: "typing-speed-25.firebaseapp.com",
@@ -32,13 +41,26 @@ export const getUserCount = async () => {
 };
 
 export const visitedCount = async () => {
-  const result = await axios.get(
-    `/api/usercount`
-  );
-  console.log(result);
   const val = await getUserCount();
   set(ref(getDB(), "users/"), {
     count: (val?.count || 0) + 1,
   });
   return val;
+};
+export const addGeoLocation = async (location: GeoLocation) => {
+  let path = location?.ip?.toString().split(".").join("_");
+  path = path.split(":").join("_");
+  console.log('path ->',path);
+  const dbRef = ref(getDB(), `geoLocation/${path}`);
+  get(dbRef)
+    .then((snapshot) => {
+      const data = snapshot.val();
+      const count = data?.count || 0;
+      console.log('path ->',{ ...location, count: count + 1 });
+      set(dbRef, { ...location, count: count + 1 });
+    })
+    .catch((e) => {
+      set(dbRef, { ...location, count: 1 });
+      console.error("~~~~~~~~~~", e);
+    });
 };

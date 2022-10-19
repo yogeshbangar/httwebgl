@@ -4,8 +4,9 @@ import Styles from "../components/Styles";
 import HTMLHeader from "../components/UI/HTMLHeader";
 import { GetServerSideProps } from "next";
 import { getIpAddressFromRequest } from "../components/util/ipAddress";
+import { getGeolocation } from "../components/services/geolocation";
+import { addGeoLocation } from "../components/Firebase/config";
 function Home(ipAddress) {
-  console.log(ipAddress);
   return (
     <>
       <HTMLHeader />
@@ -17,17 +18,15 @@ function Home(ipAddress) {
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
-  let ipAddress = undefined;
+  let geolocation = undefined;
   try {
-    ipAddress = getIpAddressFromRequest(req);
-    console.log(ipAddress, "ipAddress");
-    // const geolocation = await getGeolocation(ipAddress);
-    // isInChina = geolocation.country_name === 'China';
+    geolocation = await getGeolocation(getIpAddressFromRequest(req));
+    addGeoLocation(geolocation);
   } catch (e) {
     console.error("loading isInChina failed with error: ", e);
   }
   return {
-    props: { ipAddress },
+    props: { geolocation },
   };
 };
 export default Home;
