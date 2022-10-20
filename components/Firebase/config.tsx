@@ -49,14 +49,13 @@ export const visitedCount = async () => {
 };
 export const addGeoLocation = async (location: GeoLocation) => {
   let path = location?.ip?.toString().split(".").join("_");
-  path = path.split(":").join("_");
-  console.log('path ->',path);
+  path = path?.split(":").join("_");
+  if (!path) return;
   const dbRef = ref(getDB(), `geoLocation/${path}`);
   get(dbRef)
     .then((snapshot) => {
       const data = snapshot.val();
       const count = data?.count || 0;
-      console.log('path ->',{ ...location, count: count + 1 });
       set(dbRef, { ...location, count: count + 1 });
     })
     .catch((e) => {

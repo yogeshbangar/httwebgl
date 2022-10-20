@@ -6,7 +6,14 @@ import { GetServerSideProps } from "next";
 import { getIpAddressFromRequest } from "../components/util/ipAddress";
 import { getGeolocation } from "../components/services/geolocation";
 import { addGeoLocation } from "../components/Firebase/config";
+import React from "react";
 function Home(ipAddress) {
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      window["ipAddress"] = ipAddress;
+    }
+  }, []);
+
   return (
     <>
       <HTMLHeader />
