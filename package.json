@@ -18,6 +18,7 @@
     "@reduxjs/toolkit": "^1.8.6",
     "@types/enzyme": "^3.10.12",
     "@types/jest": "^29.2.0",
+    "@zarconontol/enzyme-adapter-react-18": "^0.7.3",
     "axios": "^1.1.2",
     "canvas-sketch-util": "^1.10.0",
     "cross-env": "^7.0.3",
@@ -40,7 +41,6 @@
   "devDependencies": {
     "@types/node": "18.8.4",
     "@types/react": "18.0.21",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "eslint": "^8.25.0",
     "eslint-config-next": "^12.3.1",
     "prettier": "^2.7.1",
