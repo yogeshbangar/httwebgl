@@ -7,6 +7,7 @@ import { getIpAddressFromRequest } from "../components/util/ipAddress";
 import { getGeolocation } from "../components/services/geolocation";
 import { addGeoLocation } from "../components/Firebase/config";
 import React from "react";
+import Blockchain from "../components/UI/Blockchain";
 function Home(ipAddress) {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
@@ -25,12 +26,12 @@ function Home(ipAddress) {
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
-  let geolocation = undefined;
+  let geolocation = null;
   try {
     geolocation = await getGeolocation(getIpAddressFromRequest(req));
     addGeoLocation(geolocation);
   } catch (e) {
-    console.error("loading isInChina failed with error: ", e);
+    console.error("loading failed with error: ", e);
   }
   return {
     props: { geolocation },

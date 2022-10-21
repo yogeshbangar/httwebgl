@@ -8,6 +8,8 @@ import { IMainState } from "../../interfaces";
 import Loading from "./Loading";
 import { visitedCount } from "../Firebase/config";
 import { FaHome, FaInfo, FaFortAwesome } from "react-icons/fa";
+import { SiEthereum } from "react-icons/si";
+import Blockchain from "./Blockchain";
 const UI = () => {
   const [state, setState] = React.useState({
     menu: undefined,
@@ -104,7 +106,7 @@ const UI = () => {
                 }}
               >
                 <FaInfo />
-                <span className="menu-title">About</span>
+                <span className="menu-title">ABOUT</span>
               </div>
             </li>
             <li className="">
@@ -116,13 +118,15 @@ const UI = () => {
                 <span className="menu-title">PROJECTS</span>
               </div>
             </li>
-            <li className="" style={{ display: "none" }}>
+            <li className="">
               <div
                 className="menu-item"
-                onClick={() => setState({ ...state, menu: MenuItem.CONTACT })}
+                onClick={() =>
+                  setState({ ...state, menu: MenuItem.SEND_CRYPTO })
+                }
               >
-                <FaInfo />
-                <span className="menu-title">CONTACT</span>
+                <SiEthereum />
+                <span className="menu-title">CRYPTO</span>
               </div>
             </li>
           </ul>
@@ -176,11 +180,20 @@ const UI = () => {
         <PopupPage
           onClose={() => {
             setState({ ...state, url: undefined });
-            console.log("~~~~~2~~~~~~~~~~");
           }}
           url={state.url}
         />
       )}
+      {state.menu === MenuItem.SEND_CRYPTO && (
+        <PopupContainer
+          maxWidth={"800px"}
+          zIndex={100000}
+          className="send-crypto"
+        >
+          <Blockchain onClose={() => setState({ ...state, menu: undefined })} />
+        </PopupContainer>
+      )}
+
       {!isAllModelLoaded && <Loading />}
       <style jsx global>{`
         .menu-title {
@@ -251,7 +264,7 @@ const UI = () => {
           -webkit-box-pack: center;
           justify-content: center;
           font-size: 14px;
-          letter-spacing: 10px;
+          letter-spacing: 6px;
           font-weight: normal;
           gap: 40px;
           color: rgb(36, 36, 36);

@@ -7,10 +7,12 @@ export const watchGLBPath_1 =
 export const loadingGif = basePath + "3D/loading.gif";
 export const environmentImagePath =
   "https://static.inspify.io/Chopard/ar/asset/v2/hdr/powerP2Studio_Dim02.hdr";
+
+export const logoImg = `${basePath}images/apple-touch-icon-72x72.png`;
 export enum MenuItem {
   ABOUT = "About",
   HOME = "Home",
-  CAREER = "CAREER",
+  SEND_CRYPTO = "Send Crypto",
   EXPERTISE = "EXPERTISE",
   CONTACT = "CONTACT",
 }
