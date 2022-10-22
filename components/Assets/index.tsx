@@ -9,6 +9,7 @@ export const environmentImagePath =
   "https://static.inspify.io/Chopard/ar/asset/v2/hdr/powerP2Studio_Dim02.hdr";
 
 export const logoImg = `${basePath}images/apple-touch-icon-72x72.png`;
+export const ogImg = `${basePath}3D/img.jpg`;
 export enum MenuItem {
   ABOUT = "About",
   HOME = "Home",
