@@ -7,7 +7,7 @@ export const getIpAddressFromRequest = (req: IncomingMessage) => {
     req.socket.remoteAddress
   );
 };
-export const shortenAddress = (address) =>
+export const shortenAddress = (address: string) =>
   address?.length > 6
     ? `${address.slice(0, 5)}...${address.slice(address.length - 4)}`
     : address;

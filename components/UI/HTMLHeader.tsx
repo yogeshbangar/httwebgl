@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { ReactNode } from "react";
+import React from "react";
 import { basePath, ogImg } from "../Assets";
 
 const getFavicon = () => `${basePath}images/favicon.ico`;

@@ -1,65 +1,57 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
+
 const CommonAnimation = () => {
-  const canvasRef = React.useRef();
-  const [state, setState] = React.useState({
-    camera: undefined,
-    renderer: undefined,
-    scene: undefined,
-  });
-  const animate = () => {
-    if (state.renderer == undefined || state.scene == undefined) {
-      return;
-    }
-     state.renderer.render(state.scene, state.camera);
-    requestAnimationFrame(animate);
+  const mountRef: any = useRef(null);
+
+  const bufferGeometry = (): THREE.Mesh => {
+    const geometry = new THREE.BufferGeometry();
+    const vertices = new Float32Array([
+      -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0,
+      1.0, -1.0, -1.0, 1.0,
+    ]);
+    geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    return new THREE.Mesh(geometry, material);
   };
-  const cleanUp = () => {
-    console.log("~~~~~~~cleanUp~~~~~~~");
-  };
-  React.useEffect(() => {
-    const canvas = document.querySelector("#c") as HTMLCanvasElement;
+
+  useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      45,
+      75,
       window.innerWidth / window.innerHeight,
       0.1,
-      30
+      1000
     );
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-    });
-
+    const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
-    renderer.outputEncoding = THREE.sRGBEncoding;
-
-    camera.position.set(0, 5, 12);
-    camera.lookAt(new THREE.Vector3(0, 0.5, 0));
-    setState({ ...state, scene: scene, camera: camera, renderer: renderer });
-    return () => {
-      cleanUp();
+    mountRef?.current?.appendChild(renderer.domElement);
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    const buffered = bufferGeometry();
+    buffered.position.z = -100;
+    buffered.position.x = -50;
+    scene.add(buffered);
+    camera.position.z = 5;
+    const animate = function () {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
     };
+    const onWindowResize = function () {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", onWindowResize, false);
+    animate();
+    return () => mountRef?.current?.removeChild(renderer.domElement);
   }, []);
-  return (
-    <div>
-      <canvas id="c" ref={canvasRef}></canvas>
-      <style jsx>
-        {`
-          #c {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-          }
-        `}
-      </style>
-    </div>
-  );
+
+  return <div ref={mountRef}></div>;
 };
+
 export default CommonAnimation;

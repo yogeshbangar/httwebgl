@@ -13,11 +13,11 @@ const Input = ({
   handleChange,
   err,
 }: {
-  placeholder;
-  name;
-  type;
-  value;
-  handleChange;
+  placeholder: string;
+  name: string;
+  type: string;
+  value: string | number;
+  handleChange: (e: any, name: string) => void;
   err?: boolean;
 }) => (
   <>
@@ -44,14 +44,14 @@ const Welcome = ({
 }: {
   isLoading: boolean;
   isConnecting: boolean;
-  currentAccount: string;
+  currentAccount: string | undefined;
   formData: CryptoData;
   connectWallet: () => void;
-  handleChange: (e, name) => void;
+  handleChange: (e: any, name: string) => void;
   sendTransaction: () => void;
 }) => {
-  const handleSubmit = (e) => {
-    const { addressTo, amount, keyword, message } = formData;
+  const handleSubmit = (e: any) => {
+    const { addressTo, amount } = formData;
     e.preventDefault();
     if (!addressTo?.trim() && !amount) {
       setState({ ...state, addressErr: true, amountErr: true });
@@ -64,7 +64,7 @@ const Welcome = ({
 
     sendTransaction();
   };
-  const onChange = (e, name) => {
+  const onChange = (e: any, name: string) => {
     if (name === "addressTo") {
       setState({ ...state, addressErr: false });
     }
@@ -119,7 +119,7 @@ const Welcome = ({
       <div className="ethereum-container flex-clm">
         <div className="ethereum-title">
           <SiEthereum fontSize={24} color="#fff" />
-          {shortenAddress(currentAccount)}
+          {shortenAddress(currentAccount as string)}
         </div>
         <div className="flex-clm input-container">
           <Input
