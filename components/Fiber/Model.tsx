@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -5,7 +6,7 @@ import { watchGLBPath } from "../Assets";
 import { setWireFrameMaterial } from "../util";
 import { actionDeposited } from "../../redux/action";
 import { useDispatch } from "react-redux";
-const Model = (props: any) => {
+const Model = (props) => {
   const dispatch = useDispatch();
   const watchGlb = useGLTF(watchGLBPath);
   const ref = useRef();
@@ -16,7 +17,7 @@ const Model = (props: any) => {
     }
   }, [watchGlb]);
   useFrame((state) => {
-    const refCurrent: any = ref?.current;
+    const refCurrent: THREE.Mesh = ref?.current;
     const t = state.clock.getElapsedTime();
     if (refCurrent) {
       refCurrent.rotation.x = 0.3 + Math.cos(t / 4) / 8;

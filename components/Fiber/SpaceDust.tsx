@@ -1,10 +1,13 @@
-/* eslint @typescript-eslint/no-var-requires: "off" */
 import * as THREE from "three";
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
-const Random = require('canvas-sketch-util/random');
-export function SpaceDust({ count }: { count: number }) {
-  const mesh: any = useRef();
+import Random from "canvas-sketch-util/random";
+
+export function SpaceDust({ count }) {
+  const mesh: THREE.mesh = useRef();
+  const light = useRef();
+
+  // Generate some random positions, speed factors and timings
   const particles = useMemo(() => {
     const temp = [];
     const range = 5;
@@ -25,7 +28,7 @@ export function SpaceDust({ count }: { count: number }) {
 
   useFrame(() => {
     particles.forEach((particle, index) => {
-      const { factor, speed, x, y, z } = particle;
+      let { factor, speed, x, y, z } = particle;
       const t = (particle.time += speed);
       dummy.position.set(
         x + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
@@ -43,8 +46,8 @@ export function SpaceDust({ count }: { count: number }) {
 
   return (
     <>
-      <pointLight distance={40} intensity={8} color="lightblue" />
-      <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
+      <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
+      <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronBufferGeometry args={[0.2, 0]} />
         <meshPhongMaterial color="#101010" />
       </instancedMesh>

@@ -39,7 +39,7 @@ const CustomSinCurve = () => {
   `;
   const [curve] = useState(() => {
     // Create an empty array to stores the points
-    const points = [];
+    let points = [];
     // Define points along Z axis
     for (let i = 0; i < 5; i += 1) {
       const t = i * 0.1;
@@ -52,8 +52,12 @@ const CustomSinCurve = () => {
     return new THREE.CatmullRomCurve3(points);
   });
 
-  const tubeGeometry = new THREE.TubeGeometry(curve, 128, 1.12, 32, false);
-  const material = new THREE.ShaderMaterial({
+  var tubeGeometry = new THREE.TubeGeometry(curve, 128, 1.12, 32, false);
+  const red = new THREE.MeshLambertMaterial({
+    color: "red",
+    side: THREE.DoubleSide,
+  });
+  var material = new THREE.ShaderMaterial({
     uniforms: {
       time: {
         value: 0,
@@ -66,11 +70,12 @@ const CustomSinCurve = () => {
   const clock = new THREE.Clock();
   let time = 0;
   let delta = 0;
-  useFrame(() => {
+  useFrame((state) => {
     delta = clock.getDelta();
     time += delta;
     material.uniforms.time.value = time;
   });
+  const sphere = new THREE.SphereGeometry(1, 28, 28);
   return <mesh geometry={tubeGeometry} material={material} />;
 };
 export default CustomSinCurve;

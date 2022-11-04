@@ -1,3 +1,4 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import {
   getDatabase,
@@ -6,6 +7,7 @@ import {
   child,
   set,
   Database,
+  onValue,
 } from "firebase/database";
 import { GeoLocation } from "../services/geolocation";
 const firebaseConfig = {
@@ -49,7 +51,6 @@ export const addGeoLocation = async (location: GeoLocation) => {
   let path = location?.ip?.toString().split(".").join("_");
   path = path?.split(":").join("_");
   if (!path) return;
-  path = path + "_" + location?.country_name;
   const dbRef = ref(getDB(), `geoLocation/${path}`);
   get(dbRef)
     .then((snapshot) => {

@@ -1,17 +1,6 @@
-import { useRouter } from "next/router";
 import React from "react";
-import Users from "../UI/Users";
-import Particle from "./Particle";
+import CommonAnimation from "./CommonAnimation";
 const ThreeJSAnimation = () => {
-  const router = useRouter();
-  const anim = router.query.anim === 'true';
-  return (
-    <>
-      {!anim && (
-        <Users />
-      )}
-      <Particle />
-    </>
-  );
+  return <CommonAnimation />;
 };
 export default ThreeJSAnimation;

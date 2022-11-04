@@ -8,9 +8,7 @@ export interface CryptoData {
   message: string;
 }
 const Blockchain = ({ onClose }: { onClose?: () => void }) => {
-  const [currentAccount, setCurrentAccount] = React.useState<
-    string | undefined
-  >(undefined);
+  const [currentAccount, setCurrentAccount] = React.useState(undefined);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isConnecting, setIsConnecting] = React.useState(false);
   const [formData, setFormData] = React.useState<CryptoData>({
@@ -21,10 +19,10 @@ const Blockchain = ({ onClose }: { onClose?: () => void }) => {
   });
 
   const sendTransaction = async () => {
-    const ethereum = (window as { [key: string]: any })["ethereum"];
+    const ethereum = window["ethereum"];
     try {
       if (ethereum) {
-        const { addressTo, amount } = formData;
+        const { addressTo, amount, keyword, message } = formData;
 
         const parsedAmount = ethers.utils.parseEther(amount);
         setIsLoading(true);
@@ -44,17 +42,16 @@ const Blockchain = ({ onClose }: { onClose?: () => void }) => {
         alert("No ethereum object");
         setIsLoading(false);
       }
-    } catch (error: any) {
+    } catch (error) {
       alert(error?.message || "No ethereum object");
       setIsLoading(false);
     }
   };
   const connectWallet = async () => {
-    const ethereum = (window as { [key: string]: any })["ethereum"];
     try {
-      if (!ethereum) return alert("Please install MetaMask.");
+      if (!window["ethereum"]) return alert("Please install MetaMask.");
       setIsConnecting(true);
-      const accounts = await ethereum.request({
+      const accounts = await window["ethereum"].request({
         method: "eth_requestAccounts",
       });
 
@@ -66,16 +63,15 @@ const Blockchain = ({ onClose }: { onClose?: () => void }) => {
       setIsConnecting(false);
     }
   };
-  const handleChange = (e: any, name: string) => {
+  const handleChange = (e, name) => {
     setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
     console.log(formData);
   };
   const checkIfWalletIsConnect = async () => {
-    const ethereum = (window as { [key: string]: any })["ethereum"];
     try {
-      if (!ethereum) return alert("Please install MetaMask.");
+      if (!window["ethereum"]) return alert("Please install MetaMask.");
 
-      const accounts = await ethereum.request({
+      const accounts = await window["ethereum"].request({
         method: "eth_accounts",
       });
 

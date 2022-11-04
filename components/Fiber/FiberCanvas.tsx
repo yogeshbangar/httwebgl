@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Canvas } from "@react-three/fiber";
-import { PresentationControls, Environment } from "@react-three/drei";
+import { PresentationControls, Environment, Loader } from "@react-three/drei";
 import Model from "./Model";
 import { environmentImagePath } from "../Assets";
 import { SpaceDust } from "./SpaceDust";
 import SkullPlan from "./SkulPlane";
-import AnimationModel from "./AnimationModel";
-import { AnimType } from "../../interfaces";
-const FiberCanvas = ({ animationType }: { animationType: AnimType }) => {
+import Globe from "./Globe";
+const FiberCanvas = () => {
   return (
     <>
       <React.Suspense fallback={null}>
@@ -29,7 +28,7 @@ const FiberCanvas = ({ animationType }: { animationType: AnimType }) => {
             azimuth={[-Math.PI / 1.4, Math.PI / 2]}
           >
             <React.Suspense>
-              {animationType === AnimType.BIRD ? <AnimationModel /> : <Model />}
+              <Model />
             </React.Suspense>
           </PresentationControls>
           <Environment files={environmentImagePath} />

@@ -1,26 +1,29 @@
 import React from "react";
-import Loading from "./Loading";
 import PopupContainer from "./PopupContainer";
 
 const PopupPage = ({ onClose, url }: { onClose?: () => void; url: string }) => {
   const [pageLoaded, setPageLoaded] = React.useState(false);
+  const iframeRef = React.useRef<HTMLIFrameElement>();
   return (
     <PopupContainer
       zIndex={100000}
       className="popup-iframe"
       maxWidth="90vw"
-      onClose={onClose}
+      onClose={() => {
+        console.log("~~~~~~~~~~~~~~~");
+        onClose();
+      }}
     >
       <iframe
         id="content-popup"
         src={url}
         className={`iframe-container ${pageLoaded ? "loaded" : ""}`}
+        ref={iframeRef}
         onLoad={() => setPageLoaded(true)}
         tabIndex={-1}
         onError={(e) => console.log("e->", e)}
         allowFullScreen
       />
-      {!pageLoaded && <Loading />}
       <style>{`
        .iframe-container {
         width: 90vw;
