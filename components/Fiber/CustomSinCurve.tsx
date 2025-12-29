@@ -65,7 +65,6 @@ const CustomSinCurve = () => {
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
-    extensions: { derivatives: true },
   });
   const clock = new THREE.Clock();
   let time = 0;

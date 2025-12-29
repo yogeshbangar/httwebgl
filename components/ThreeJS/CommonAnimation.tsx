@@ -34,7 +34,7 @@ const CommonAnimation = () => {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     camera.position.set(0, 5, 12);
     camera.lookAt(new THREE.Vector3(0, 0.5, 0));

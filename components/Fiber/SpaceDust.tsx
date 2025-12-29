@@ -4,8 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import Random from "canvas-sketch-util/random";
 
 export function SpaceDust({ count }) {
-  const mesh: THREE.mesh = useRef();
-  const light = useRef();
+  const mesh = useRef<THREE.InstancedMesh>(null);
+  const light = useRef<THREE.PointLight>(null);
 
   // Generate some random positions, speed factors and timings
   const particles = useMemo(() => {
@@ -27,6 +27,7 @@ export function SpaceDust({ count }) {
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   useFrame(() => {
+    if (!mesh.current) return;
     particles.forEach((particle, index) => {
       let { factor, speed, x, y, z } = particle;
       const t = (particle.time += speed);
@@ -39,7 +40,7 @@ export function SpaceDust({ count }) {
       dummy.scale.set(s, s, s);
       dummy.rotation.set(s * 5, s * 5, s * 5);
       dummy.updateMatrix();
-      mesh.current.setMatrixAt(index, dummy.matrix);
+      mesh.current!.setMatrixAt(index, dummy.matrix);
     });
     mesh.current.instanceMatrix.needsUpdate = true;
   });
