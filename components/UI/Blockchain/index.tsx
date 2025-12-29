@@ -24,7 +24,7 @@ const Blockchain = ({ onClose }: { onClose?: () => void }) => {
       if (ethereum) {
         const { addressTo, amount, keyword, message } = formData;
 
-        const parsedAmount = ethers.utils.parseEther(amount);
+        const parsedAmount = ethers.parseEther(amount);
         setIsLoading(true);
         await ethereum.request({
           method: "eth_sendTransaction",
@@ -33,7 +33,7 @@ const Blockchain = ({ onClose }: { onClose?: () => void }) => {
               from: currentAccount,
               to: addressTo,
               gas: "0x5208",
-              value: parsedAmount._hex,
+              value: ethers.toBeHex(parsedAmount),
             },
           ],
         });

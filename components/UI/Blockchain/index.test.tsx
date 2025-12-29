@@ -1,10 +1,11 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import Blockchain from "./";
 
 describe("Blockchain", () => {
   it("should render my close", () => {
-    const wrapper = shallow(<Blockchain />);
-    expect(wrapper.find(".close").length).toBe(1);
+    render(<Blockchain />);
+    const closeElement = document.querySelector(".close");
+    expect(closeElement).toBeInTheDocument();
   });
 });

@@ -5,8 +5,10 @@ import { useTexture } from "@react-three/drei";
 import { basePath } from "../Assets";
 
 const Globe = (props) => {
-  const mesh: THREE.Mesh = useRef();
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
+  const mesh = useRef<THREE.Mesh>(null);
+  useFrame((state, delta) => {
+    if (mesh.current) mesh.current.rotation.x += 0.01;
+  });
 
   const texture = useTexture({
     map: `${basePath}3D/earth.jpg`,
