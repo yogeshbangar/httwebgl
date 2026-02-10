@@ -1,24 +1,28 @@
-import { AnyAction } from "redux";
-import { ClientState } from "../../interfaces";
-import { DID_LOAD_FIBER } from "../action";
-export const defaultClientState: ClientState = {
-  isAllModelLoaded: false,
-};
+import { UnknownAction } from "redux";
+import { ClientState, defaultClientState } from "../../interfaces";
+import { ActionTypes } from "../action";
+
 const clientReducer = (
   state: ClientState = defaultClientState,
-  action: AnyAction
+  action: UnknownAction,
 ): ClientState => {
   switch (action.type) {
-    case DID_LOAD_FIBER: {
+    case ActionTypes.DID_LOAD_FIBER: {
       return {
         ...state,
-        isAllModelLoaded: action.payload,
+        isAllModelLoaded: (action as { type: string; payload: boolean })
+          .payload,
       };
     }
-
-    default:
+    case ActionTypes.INCREMENT_COUNTER: {
+      return {
+        ...state,
+        counter: (state.counter || 0) + 1,
+      };
+    }
+    default: {
       return state;
+    }
   }
 };
-
 export default clientReducer;
