@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { basePath, loadingGif, MenuItem } from "../Assets";
 import About from "./About";
 import PopupContainer from "./PopupContainer";
@@ -7,10 +8,11 @@ import { useSelector } from "react-redux";
 import { IMainState } from "../../interfaces";
 import Loading from "./Loading";
 import { visitedCount } from "../Firebase/config";
-import { FaHome, FaInfo, FaFortAwesome } from "react-icons/fa";
+import { FaHome, FaInfo, FaFortAwesome, FaCode } from "react-icons/fa";
 import { SiEthereum } from "react-icons/si";
 import Blockchain from "./Blockchain";
 const UI = () => {
+  const router = useRouter();
   const [state, setState] = React.useState({
     menu: undefined,
     url: undefined,
@@ -107,6 +109,15 @@ const UI = () => {
               >
                 <FaInfo />
                 <span className="menu-title">ABOUT</span>
+              </div>
+            </li>
+            <li className="full-stack-developer">
+              <div
+                className="menu-item"
+                onClick={() => router.push("/profile")}
+              >
+                <FaCode />
+                <span className="menu-title">Full Stack</span>
               </div>
             </li>
             <li className="">
