@@ -1,3 +1,4 @@
+import yogeshImg from '../Assets/yogeshdark.jpg'
 const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
   return (
     <>
@@ -19,7 +20,7 @@ const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
                   <div>
                     <span>
                       HI, I AM Yogesh Bangar. I AM A FULL STACK WEB DEVELOPER
-                      BASED IN ESSAOUIRA, MOROCCO. THIS WEBSITE IS A PERSONAL
+                      BASED IN INDIA. THIS WEBSITE IS A PERSONAL
                       PROJECT THAT SERVES AS A PORTFOLIO. BUILT USING REACT,
                       THREE.JS/REACT-THREE-FIBER AND BLENDER. FEEL FREE TO
                       CONTACT ME USING THE CONTACT PAGE OR THROUGH ONE OF THE
@@ -46,7 +47,7 @@ const About = ({ onClose, title }: { onClose: () => void; title: string }) => {
           border-style: solid;
           border-color: rgb(179, 179, 179);
           border-image: initial;
-          background: url(https://media-exp1.licdn.com/dms/image/C4D03AQGn6WcQjW1dCw/profile-displayphoto-shrink_800_800/0/1516780518561?e=1671062400&v=beta&t=SAWrjrGnZenKeD9qLpgU-sdz_BrIZzP86v-_PG211a4)
+          background: url(${yogeshImg.src})
             0% 0% / cover no-repeat;
           animation: 0.4s linear 0.8s 1 normal backwards running blink;
           background-position: center center;
